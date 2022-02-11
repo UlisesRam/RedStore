@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RedStore | Ecommerce Website</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="css/UI-style.css">
+<link th:href="@{/css/sweetalert2.css}" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="js/jquery-3.2.1.js"></script>
+<script src="js/script.js"></script>
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="navbar">
+			<div
+				class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+				<!-- change index.html -->
+				<a class="navbar-brand brand-logo-mini" href="home"><img
+					src="images/logo.png" alt="logo" /></a>
+			</div>
+			<ul id="MenuItems">
+				<a href="product" class="btn-category_item btn" category="all">All
+					Products </a>
+				<li></li>
+			</ul>
+			<nav>
+				<ul>
+					<ul>
+						<li class="nav-item nav-profile dropdown"><a
+							class="nav-link dropdown-toggle  pl-0 pr-0" href="#"
+							data-toggle="dropdown" id="profileDropdown"> <i
+								class="typcn typcn-user-outline mr-0"></i> <span
+								class="nav-profile-name">My Perfil</span>
+						</a>
+							<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+								aria-labelledby="profileDropdown">
+								<!-- Logout -->
+								<a class="dropdown-item"> <i
+									class="typcn typcn-power text-primary"></i> Logout
+								</a>
+							</div></li>
+					</ul>
+					<li class="submenu"><img src="images/cart.png" alt="cart"
+						width="30px" height="30px">
+						<div id="cart">
+							<table id="cart-list">
+								<thead>
+									<tr>
+										<th></th>
+										<th>Name</th>
+										<th>Price</th>
+										<th>Price After Discount</th>
+										<th>Quantity</th>
+										<th></th>
+										<th>Amount</th>
+										<th></th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+								<tr>
+									<div class="total-amount-before-discount">
+										<td>Total amount (before discount):</td>
+										<td class="price" id="total-amount">0</td>
+									</div>
+									<div class="total-amount-after-discount">
+										<td>Total amount (after discount):</td>
+										<td class="price" id="total-amount-after-discount">0</td>
+									</div>
+								</tr>
+							</table>
+
+							<a href="#" id="clean-cart" class="btn btn-primary" hidden>Clean
+								cart</a>
+
+							<button id="btn-apply-coupon" onclick="getHref()"
+								class="btn btn-light">Payment</button>
+
+
+							<!----------------------- COUPON --------------------->
+							<div class="coupon-apply">
+								<!-- <input id="coupon" class="coupon" type="text" placeholder="Enter Coupon"> -->
+								<label for="coupons">Choose a coupon: </label> <select
+									data-id="1" name="coupons" id="coupon">
+									<option selected disabled>-- Select --</option>
+									<option th:each="coupon: ${coupons}"
+										th:id="${coupon.COUPCATEGORY}"
+										th:value="${coupon.CO_DISCOUNT}" th:text="${coupon.CO_NAME}"></option>
+
+								</select>
+								<button id="btn-apply-coupon" onclick="getPrice()"
+									class="btn btn-light">Apply</button>
+								<!--<input type="text" id="hidden-value" value="230" hidden>-->
+							</div>
+
+						</div>
+		</div>
+		</li>
+		</ul>
+
+		<button
+			class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
+			type="button" data-toggle="offcanvas">
+			<span class="typcn typcn-th-menu"></span>
+		</button>
+
+
+		</nav>
+	</div>
+
+
+	<div class="small-container">
+		<div class="row">
+			<div class="col-2">
+				<h1>
+					Give Your Wourkout <br> A New Style!
+				</h1>
+				<p>
+					Success isn't always about greatness. It's about consistency.
+					Consistent <br>hard work gains success. Greatness will come.
+				</p>
+
+			</div>
+
+			<div class="col-6">
+				<div id="carouselExampleIndicators" class="carousel slide"
+					data-ride="carousel">
+					<ol class="carousel-indicators">
+						<li data-target="#carouselExampleIndicators" data-slide-to="0"
+							class="active"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+					</ol>
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<div class="col-6">
+								<img src="images/sports.png" class="imghome"
+									style="margin-top: 200px;">
+							</div>
+						</div>
+						<div th:each="promEve, counter : ${promEves}" class="carousel-item">
+							<div class="card">
+								<div  class="card-header"> Promotional Events </div>
+								<div id="item-list" class="card-body products-list">
+									<div class="product-itemPromo">
+										<span th:text="${promEve.PROM_NAME}" ></span>
+										<div th:each="coupon, counter : ${coupon}" class="col-4" style="align-content: center;">
+											<img src="images/soccer2.jpg">
+											<h4> Available Coupons</h4>
+											<h2 th:text="${coupon.CO_NAME}"> New Year</h2>
+											<a data-id="0"></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<a class="carousel-control-prev" href="#carouselExampleIndicators"
+						role="button" data-slide="prev"> <span
+						class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+						class="sr-only">Previous</span>
+					</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+						role="button" data-slide="next"> <span
+						class="carousel-control-next-icon" aria-hidden="true"></span> <span
+						class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+	<!------------------ Footer ---------------->
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="footer-col-2">
+					<img src="images/logo-white.png">
+					<p>Our purpose is to sustainably make the pleasure and benefits
+						of sports accesible to the many.</p>
+				</div>
+				<div class="footer-col-3">
+					<h3>Useful Links</h3>
+					<ul>
+						<li>Coupons</li>
+						<li>Blog Post</li>
+						<li>Return Policy</li>
+						<li>Join Affiliate</li>
+					</ul>
+				</div>
+				<div class="footer-col-4">
+					<h3>Follow Us</h3>
+					<ul>
+						<li>Facebook</li>
+						<li>Twitter</li>
+						<li>Instagram</li>
+						<li>YouTube</li>
+					</ul>
+				</div>
+			</div>
+			<hr>
+			<p class="copyright">Copyright 2021 - MX-Tribe.</p>
+		</div>
+	</footer>
+
+	<!-- JS for Toggle Menu -->
+	<script>
+		var MenuItems = document.getElementById("MenuItems");
+		MenuItems.style.maxHeight = "0px";
+
+		function menutoggle() {
+			if (MenuItems.style.maxHeight == "0px") {
+				MenuItems.style.maxHeight = "200px";
+			} else {
+				MenuItems.style.maxHeight = "0px";
+			}
+		}
+	</script>
+
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+	<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
+	<script type="text/javascript" th:src="@{/js/sweetalert2.all.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/script.js}"></script>
+
+</body>
+
+</html>

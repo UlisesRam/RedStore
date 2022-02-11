@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head> 
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>RedStore Admin</title>
+<link th:href="@{/css/style.css}" rel="stylesheet">
+<link th:href="@{/css/font/typicons.css}" rel="stylesheet">
+<link th:href="@{/css/sweetalert2.min.css}" rel="stylesheet">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script type="text/javascript" th:src="@{/js/sweetalert2.all.min.js}"></script>
+   <script type="text/javascript" th:src="@{/js/alerts.js}"></script>
+ 
+</head>
+<body>
+	<div class="container-scroller">
+	
+		<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+			<div
+				class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+				<!-- change index.html -->
+				 <a
+					class="navbar-brand brand-logo-mini" href="admin.html"><img
+					src="images/logo.png" alt="logo" /></a>
+			</div>
+			<!-- data-toggle="dropdown" -->
+			<div
+				class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+				<ul class="navbar-nav navbar-nav-right">
+					<li class="nav-item nav-profile dropdown"><a
+						class="nav-link dropdown-toggle  pl-0 pr-0" href="#"
+						data-toggle="dropdown" id="profileDropdown"> 
+					</a>
+						<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+							aria-labelledby="profileDropdown">
+							<!-- Logout -->
+							<a class="dropdown-item" href="/adminLogin"> <i
+								class="typcn typcn-power text-primary" ></i> Logout
+							</a>
+						</div></li>
+				</ul>
+				<button
+					class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
+					type="button" data-toggle="offcanvas">
+					<span class="typcn typcn-th-menu"></span>
+				</button>
+			</div>
+		</nav>
+		
+		<div class="container-fluid page-body-wrapper">
+		
+			<nav class="sidebar sidebar-offcanvas" id="sidebar">
+					
+							<ul class="nav">
+					<li class="nav-item">
+						<div class="d-flex sidebar-profile">
+							<div class="sidebar-profile-name">
+								<p class="sidebar-name">Welcome Admin</p>
+								<p class="sidebar-designation">Welcome</p>
+							</div>
+						</div>
+						<div class="nav-search">
+							<div class="input-group">
+								<input type="text" class="form-control"
+									placeholder="Type to search..." aria-label="search"
+									aria-describedby="search" id="searchText">
+								<div class="input-group-append">
+									<span class="input-group-text" id="search"> <i
+										class="typcn typcn-zoom"></i>
+									</span>
+								</div>
+							</div>
+						</div>
+						<p class="sidebar-menu-title">Dash menu</p>
+					</li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/admin}">
+							<i class="typcn typcn-tag menu-icon"></i> <span
+							class="menu-title">Products</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/coupon}">
+							<i class="typcn typcn-film menu-icon"></i> <span
+							class="menu-title">Cupons</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" 
+						th:href="@{/promotional-events}"> <i
+							class="typcn typcn-eye menu-icon"></i> <span class="menu-title">Promotional
+								Events</span>
+					</a></li>
+					
+					<li class="nav-item"><a class="nav-link"
+							th:href="@{/save_admin}" data-toggle="modal"
+							data-target="#addUser"> <i
+								class="typcn typcn-user-add menu-icon"></i> <span
+								class="menu-title">Add New Admin</span>
+						</a></li>
+
+				</ul>
+			</nav>
+		
+		
+			<!-- partial -->
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<div class="row">
+						<div class="col-sm-6">
+							<!-- Name and last login -->
+							<h3 class="mb-0 font-weight-bold">Welcome</h3>
+							<br>
+						</div>
+					</div>
+
+					<!-- Table - Product List - Iterable -->		
+					<div class="modal-content">
+				<div class="col-12 grid-margin stretch-card">
+					<div class="card">
+						<div class="card-body">
+							<h4 class="card-title" th:text="#{action.add}">Edit</h4>
+							<p class="card-description">Edit Product</p>
+							
+							<!-- Object - product -->
+							<form th:action="@{/save}" th:object="${product}" method="post">
+							<input type="hidden" class="form-control" th:field="*{product_id}">
+								<!-- Field Name -->
+								<div class="form-group">
+									<label for="name" th:text="#{lp.name}">name</label> 
+									<input type="text" class="form-control" name="pname" id="pname" th:field="*{pname}">
+								</div>
+								<!-- Field Description -->
+								<div class="form-group">
+									<label for="description" th:text="#{lp.description}">description</label>
+									<input type="text" class="form-control" name="pdescription" id="pdescription" th:field="*{pdescription}">	
+								</div>
+								<!-- Field Category -->
+								<div class="form-group">
+									<label for="category" th:text="#{lp.category}">category</label>
+									<input type="text" class="form-control" name="pcategory" id="pcategory" th:field="*{pcategory}">
+								</div>
+								<!-- Field Price -->
+								<div class="form-group">
+									<label for="price" th:text="#{lp.price}">price</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text bg-primary text-white">$</span>
+										</div>
+										
+									<input type="number" class="form-control" name="price" aria-label="Amount" id="price" min="1" step="any" th:field=*{price}></input>
+										<div class="input-group-append">
+											<span class="input-group-text">.00</span>
+										</div>
+									</div>
+								</div>
+								<!-- Field Image -->
+								<div class="form-group">
+									<label for="image" th:text="#{lp.image}">image</label> 
+									<input type="file" class="form-control" name="pimage" id="pimage" th:value=*{pimage}></input>
+								</div>
+								<!-- Buttons Save or Cancel -->
+								<button type="submit" class="btn btn-primary mr-2"
+									th:text="#{action.save}" id="saveB">Save</button>
+								<button type="button" class="btn btn-light" data-dismiss="modal"
+									th:text="#{action.cancel}">Cancel</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+					<!-- End table - Product List -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" th:src="@{/js/vendor.bundle.base.js}"></script>
+	<script type="text/javascript" th:src="@{/js/settings.js}"></script>
+	
+			
+		
+</body>
+</html>
